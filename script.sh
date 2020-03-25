@@ -76,8 +76,9 @@ url=${arg2}.htb
 ## gobuster
 if [[ -n $(cat /etc/os-release |grep kali) ]]
 then
+	apt install gobuster
 	gobuster dir -u http://${url}:${port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -o dirbuster.root.out
 else
-	error "gobuster not installed"
+	error "gobuster not installed / use a kali linux machine"
 fi
 	
