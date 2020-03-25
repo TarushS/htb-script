@@ -25,7 +25,6 @@ fi
 # Print an error message to stderr
 function error {
 	echo "[${RED}error${RST}] $@" 1>&2
-	exit 1
 }
 
 # Print a warning message to stderr
@@ -72,5 +71,13 @@ fi
 echo ""
 echo ""
 info "open the ip using: "$arg2".htb"
-## gobuster
+url=${arg2}.htb
 
+## gobuster
+if [[ -n $(cat /etc/os-release |grep kali) ]]
+then
+	gobuster dir -u http://${url}:${port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -o dirbuster.root.out
+else
+	error "gobuster not installed"
+fi
+	
